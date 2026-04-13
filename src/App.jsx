@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react'
 import { motion } from 'framer-motion'
 import {
   BadgeCheck,
@@ -12,6 +12,8 @@ import {
   Sparkles,
   Timer,
   Truck,
+  Volume2,
+  VolumeX,
 } from 'lucide-react'
 
 const learnItems = [
@@ -78,15 +80,53 @@ const fadeUp = {
 function App() {
   const launchDate = useMemo(() => new Date('2026-04-20T23:59:59Z'), [])
   const [timeLeft, setTimeLeft] = useState(getTimeLeft(launchDate))
+  const [isAudioPlaying, setIsAudioPlaying] = useState(false)
+  const [audioError, setAudioError] = useState('')
+  const audioRef = useRef(null)
 
   useEffect(() => {
     const id = setInterval(() => setTimeLeft(getTimeLeft(launchDate)), 1000)
     return () => clearInterval(id)
   }, [launchDate])
 
+  const toggleAudio = async () => {
+    if (!audioRef.current) return
+
+    try {
+      if (isAudioPlaying) {
+        audioRef.current.pause()
+        setIsAudioPlaying(false)
+        return
+      }
+
+      await audioRef.current.play()
+      setIsAudioPlaying(true)
+      setAudioError('')
+    } catch {
+      setAudioError('Unable to autoplay audio. Tap again after interacting with the page.')
+    }
+  }
+
   return (
     <main className="relative pb-28">
-      <div className="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_20%_15%,rgba(37,99,235,0.28),transparent_35%),radial-gradient(circle_at_80%_10%,rgba(16,185,129,0.2),transparent_30%),#020617]" />
+      <video
+        className="absolute inset-0 -z-20 h-full w-full object-cover"
+        autoPlay
+        muted
+        loop
+        playsInline
+        preload="metadata"
+        poster="/media/dribbling-poster.jpg"
+      >
+        <source src="/media/dribbling.webm" type="video/webm" />
+        <source src="/media/dribbling.mp4" type="video/mp4" />
+      </video>
+
+      <div className="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_20%_15%,rgba(37,99,235,0.35),transparent_35%),radial-gradient(circle_at_80%_10%,rgba(16,185,129,0.22),transparent_30%),rgba(2,6,23,0.78)]" />
+
+      <audio ref={audioRef} loop preload="none">
+        <source src="/media/muje.mp3" type="audio/mpeg" />
+      </audio>
 
       <div className="sticky top-0 z-40 border-b border-amber-200/30 bg-amber-100/95 px-4 py-2 text-center text-sm font-semibold text-amber-900 backdrop-blur">
         <span className="inline-flex items-center gap-2"><Timer size={14} /> Enrollment closes soon — {timeLeft}</span>
@@ -94,13 +134,26 @@ function App() {
 
       <section className="section-wrap pt-12 sm:pt-16 lg:pt-20">
         <motion.div initial="hidden" animate="visible" variants={fadeUp} transition={{ duration: 0.5 }}>
-          <p className="mb-5 inline-flex items-center gap-2 rounded-full border border-emerald-400/40 bg-emerald-500/10 px-4 py-2 text-sm font-medium text-emerald-300">
-            <BadgeCheck size={16} /> Trusted by 1,000+ students in Nigeria
-          </p>
+          <div className="mb-5 flex flex-wrap items-center gap-3">
+            <p className="inline-flex items-center gap-2 rounded-full border border-emerald-400/40 bg-emerald-500/10 px-4 py-2 text-sm font-medium text-emerald-300">
+              <BadgeCheck size={16} /> Trusted by 1,000+ students in Nigeria
+            </p>
+            <button
+              type="button"
+              onClick={toggleAudio}
+              className="inline-flex items-center gap-2 rounded-full border border-white/30 bg-white/10 px-4 py-2 text-sm font-semibold text-white transition hover:bg-white/20"
+            >
+              {isAudioPlaying ? <VolumeX size={16} /> : <Volume2 size={16} />}
+              {isAudioPlaying ? 'Pause Muje track' : 'Play Muje track'}
+            </button>
+          </div>
+
+          {audioError ? <p className="mb-4 text-sm text-amber-200">{audioError}</p> : null}
+
           <h1 className="max-w-5xl text-4xl font-black leading-tight text-white sm:text-5xl lg:text-6xl">
             How Nigerians Are Making ₦100k–₦500k Monthly With Mini Importation <span className="text-blue-300">(Without a Shop)</span>
           </h1>
-          <p className="mt-5 max-w-3xl text-lg text-slate-300 sm:text-xl">
+          <p className="mt-5 max-w-3xl text-lg text-slate-100 sm:text-xl">
             Step-by-step system to start from scratch, even if you’ve failed before. No confusing theory. Just practical moves that bring sales.
           </p>
 
@@ -111,7 +164,7 @@ function App() {
             <a href="#proof" className="inline-flex items-center justify-center rounded-xl border border-white/20 bg-white/5 px-7 py-4 text-lg font-bold text-white transition hover:bg-white/10">
               See Student Results
             </a>
-            <p className="text-sm text-slate-300">💳 One-time payment • 🔒 Secure checkout • 📱 Instant access</p>
+            <p className="text-sm text-slate-100">💳 One-time payment • 🔒 Secure checkout • 📱 Instant access</p>
           </div>
         </motion.div>
       </section>
