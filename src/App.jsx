@@ -99,10 +99,12 @@ function App() {
           </p>
           <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
             <a
-              href="#pricing"
+              href="https://chat.whatsapp.com/JRBRWMaWbOsCuqBfENSAMk?mode=gi_t"
+              target="_blank"
+              rel="noreferrer"
               className="inline-flex items-center justify-center rounded-xl bg-blue-600 px-8 py-4 text-lg font-bold text-white shadow-glow transition hover:bg-blue-500"
             >
-              Start Learning Now
+              Join Free WhatsApp Group
             </a>
             <div className="inline-flex items-center gap-2 rounded-xl border border-white/15 bg-white/5 px-4 py-3 text-slate-200">
               <Timer size={18} /> Slots close in: <strong>{timeLeft}</strong>
@@ -205,14 +207,22 @@ function App() {
 
       <section id="pricing" className="section-wrap mt-16">
         <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.2 }} variants={fadeUp} className="rounded-3xl border border-amber-300/40 bg-amber-50 p-8 text-slate-900">
-          <p className="inline-flex rounded-full bg-amber-200 px-3 py-1 text-sm font-semibold text-amber-900">Limited slots available this week</p>
-          <h2 className="mt-4 text-3xl font-extrabold sm:text-4xl">Start your mini importation journey today</h2>
+          <p className="inline-flex rounded-full bg-amber-200 px-3 py-1 text-sm font-semibold text-amber-900">Free group access this week</p>
+          <h2 className="mt-4 text-3xl font-extrabold sm:text-4xl">Join the WhatsApp group for free</h2>
           <div className="mt-6 flex flex-wrap items-end gap-4">
-            <p className="text-xl text-slate-500 line-through">₦75,000</p>
-            <p className="text-5xl font-black text-slate-900">₦19,999</p>
+            <p className="text-xl text-slate-500 line-through">₦19,999</p>
+            <p className="text-5xl font-black text-slate-900">₦0</p>
           </div>
-          <a href="#final-cta" className="mt-8 inline-flex rounded-xl bg-slate-900 px-8 py-4 text-lg font-bold text-white transition hover:bg-slate-700">
-            Secure My Spot
+          <p className="mt-4 max-w-2xl text-base text-slate-700">
+            Start free inside the community. Premium mentoring and advanced offers will be shared in the group.
+          </p>
+          <a
+            href="https://chat.whatsapp.com/JRBRWMaWbOsCuqBfENSAMk?mode=gi_t"
+            target="_blank"
+            rel="noreferrer"
+            className="mt-8 inline-flex rounded-xl bg-slate-900 px-8 py-4 text-lg font-bold text-white transition hover:bg-slate-700"
+          >
+            Join Group for Free
           </a>
         </motion.div>
       </section>
@@ -233,23 +243,32 @@ function App() {
         <CircleDollarSign className="mx-auto text-emerald-400" size={36} />
         <h2 className="mt-4 text-3xl font-extrabold text-white sm:text-5xl">Your next income level can start with one smart decision.</h2>
         <p className="mx-auto mt-4 max-w-2xl text-lg text-slate-300">
-          You’ve seen the strategy. You’ve seen the proof. Don’t overthink it. Join now and start building a real income stream.
+          You’ve seen the strategy. You’ve seen the proof. Join the free WhatsApp group now and watch out for premium offers inside.
         </p>
-        <a href="https://wa.me/2347086865133" className="mt-8 inline-flex rounded-xl bg-emerald-500 px-10 py-4 text-lg font-black text-slate-900 transition hover:bg-emerald-400">
-          Secure My Spot
+        <a
+          href="https://chat.whatsapp.com/JRBRWMaWbOsCuqBfENSAMk?mode=gi_t"
+          target="_blank"
+          rel="noreferrer"
+          className="mt-8 inline-flex rounded-xl bg-emerald-500 px-10 py-4 text-lg font-black text-slate-900 transition hover:bg-emerald-400"
+        >
+          Join Group for Free
         </a>
       </section>
 
       <a
-        href="#pricing"
+        href="https://chat.whatsapp.com/JRBRWMaWbOsCuqBfENSAMk?mode=gi_t"
+        target="_blank"
+        rel="noreferrer"
         className="fixed inset-x-4 bottom-4 z-50 rounded-xl bg-blue-600 px-6 py-4 text-center text-lg font-bold text-white shadow-glow md:hidden"
       >
-        Start Learning Now
+        Join Group for Free
       </a>
 
       <a
-        href="https://wa.me/2347086865133"
+        href="https://chat.whatsapp.com/JRBRWMaWbOsCuqBfENSAMk?mode=gi_t"
         aria-label="Chat on WhatsApp"
+        target="_blank"
+        rel="noreferrer"
         className="fixed bottom-24 right-4 z-50 inline-flex h-14 w-14 items-center justify-center rounded-full bg-emerald-500 text-slate-900 shadow-lg transition hover:scale-105"
       >
         <MessageCircle size={24} />
